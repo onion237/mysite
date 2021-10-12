@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <div id="navigation">
 	<ul>
-		<li><a href="<%=request.getContextPath()%>">안대혁</a></li>
+		<li><a href="<%=request.getContextPath()%>">이용수</a></li>
 		<li><a href="<%=request.getContextPath()%>/guestbook">방명록</a></li>
 		<li><a href="">게시판</a></li>
 	</ul>
