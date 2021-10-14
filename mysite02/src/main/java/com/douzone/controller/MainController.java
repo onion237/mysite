@@ -1,6 +1,8 @@
 package com.douzone.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,11 +19,31 @@ import com.douzone.web.util.MvcUtil;
 public class MainController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ActionFactory actionFactory = new MainActionFactory();
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	public MainController() {
+		super();
+	}
+
+	@Override
+	public void init() throws ServletException {
+		Enumeration<String> initParameterNames = this.getServletContext().getInitParameterNames();
+		while(initParameterNames.hasMoreElements()) {
+			System.out.println(initParameterNames.nextElement());
+			
+		}
+		System.out.println("----------- -- ----------------------");
+		String config = this.getServletConfig().getInitParameter("config");
+		System.out.println("Config : " + config);
+		super.init();
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		actionFactory.getAction(request.getParameter("a")).execute(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		doGet(request, response);
 	}
 

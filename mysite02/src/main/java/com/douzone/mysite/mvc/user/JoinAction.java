@@ -13,8 +13,12 @@ import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
 public class JoinAction implements Action {
-	private final UserDao dao = new UserDao(new SimpleConnectionProvider());
+	private final UserDao dao;
 	
+	public JoinAction(UserDao dao) {
+		this.dao = dao;
+	}
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String name = request.getParameter("name");

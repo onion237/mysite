@@ -38,9 +38,9 @@ public class UserDao {
 		return result;
 	}
 	
-	public UserVo findByUserNo(Integer no) {
+	public UserVo findByUserNo(Long no) {
 		UserVo result = null;
-		String sql = "select no,name,email, gender, from user where no = ?";
+		String sql = "select no, name, email, gender from user where no = ?";
 		try(Connection conn = connectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)){
 			
@@ -89,6 +89,36 @@ public class UserDao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return result;
+	}
+
+	public boolean update(UserVo user) {
+		boolean result = false;
+		String sql = null;
+		boolean updatePassword = false;
+		if(user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
+			sql = "update `user` set name = ?, gender = ?, password = ? where no = ?";
+			updatePassword = true;
+		}else {
+			sql = "update `user` set name = ?, gender = ? where no = ?";
+		}
+		try(Connection conn = connectionProvider.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(sql)){
+			int idx = 1;
+			pstmt.setString(idx++, user.getName());
+			pstmt.setString(idx++, user.getGender());
+			if(updatePassword) {
+				pstmt.setString(idx++, user.getPassword());
+			}
+			pstmt.setLong(idx++, user.getNo());
+			
+			
+			result = pstmt.executeUpdate() > 0;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
 

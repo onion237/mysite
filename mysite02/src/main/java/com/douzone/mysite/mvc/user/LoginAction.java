@@ -14,7 +14,11 @@ import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
 public class LoginAction implements Action {
-	private final UserDao dao = new UserDao(new SimpleConnectionProvider());
+	private final UserDao dao;
+
+	public LoginAction(UserDao dao) {
+		this.dao = dao;
+	}
 
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -34,6 +38,7 @@ public class LoginAction implements Action {
 		}
 		
 		System.out.println("로그인 성공");
+		
 		HttpSession session = request.getSession(true);
 		session.setAttribute("user", result);
 		

@@ -1,21 +1,29 @@
-package com.douzone.mysite.mvc.guestbook;
+package com.douzone.mysite.mvc.board;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.douzone.dao.GuestBookDao;
-import com.douzone.util.SimpleConnectionProvider;
-import com.douzone.vo.GuestBookVo;
+import com.douzone.dao.BoardDao;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
-public class DeleteFormAction implements Action {
+public class WriteFormAction implements Action {
+	private final BoardDao dao;
+	
+	public WriteFormAction(BoardDao dao) {
+		super();
+		this.dao = dao;
+	}
+
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MvcUtil.forward("guestbook/deleteform", request, response);
+		
+		MvcUtil.forward("board/write", request, response);
+		
 	}
+
 }
