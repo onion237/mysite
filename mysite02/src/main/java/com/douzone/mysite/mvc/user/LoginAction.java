@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.douzone.dao.UserDao;
-import com.douzone.util.SimpleConnectionProvider;
 import com.douzone.vo.UserVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;

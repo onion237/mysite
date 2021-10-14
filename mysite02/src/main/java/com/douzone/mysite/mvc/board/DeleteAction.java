@@ -6,8 +6,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.User;
-
 import com.douzone.dao.BoardDao;
 import com.douzone.vo.UserVo;
 import com.douzone.web.mvc.Action;

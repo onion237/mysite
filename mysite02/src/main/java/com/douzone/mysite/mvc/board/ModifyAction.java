@@ -36,7 +36,13 @@ public class ModifyAction implements Action {
 			MvcUtil.redirect(request.getContextPath(), request, response);
 			return;
 		}
-	
+		
+		if(vo.getNo() != dao.getUserNo(boardNo)) {
+			System.out.println("권한 없음!!!!!");
+			MvcUtil.redirect(request.getContextPath(), request, response);
+			return;
+		}
+		
 		BoardVo board = new BoardVo();
 		board.setNo(boardNo);
 		board.setTitle(title);

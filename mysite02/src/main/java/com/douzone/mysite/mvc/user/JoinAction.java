@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.douzone.dao.UserDao;
-import com.douzone.util.SimpleConnectionProvider;
 import com.douzone.vo.UserVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;

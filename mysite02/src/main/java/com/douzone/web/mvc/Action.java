@@ -1,6 +1,5 @@
 package com.douzone.web.mvc;
 
-import java.io.IOError;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
