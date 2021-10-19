@@ -9,7 +9,7 @@ import com.douzone.web.mvc.ActionFactory;
 public class GuestBookActionFactory extends ActionFactory {
 	private Map<String, Action> actionMap = new HashMap<>();
 	
-	public GuestBookActionFactory() {
+	public GuestBookActionFactory() {	
 		super();
 		actionMap.put("list", new ListAction());
 		actionMap.put("deleteform", new DeleteFormAction());

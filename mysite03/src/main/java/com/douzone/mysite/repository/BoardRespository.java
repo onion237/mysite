@@ -1,4 +1,4 @@
-package com.douzone.dao;
+package com.douzone.mysite.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,14 +7,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.douzone.mysite.vo.BoardVo;
+import com.douzone.mysite.vo.PageInfo;
 import com.douzone.util.ConnectionProvider;
-import com.douzone.vo.BoardVo;
-import com.douzone.vo.PageInfo;
 
-public class BoardDao {
+public class BoardRespository {
 	private final ConnectionProvider connectionProvider;
 
-	public BoardDao(ConnectionProvider connectionProvider) {
+	public BoardRespository(ConnectionProvider connectionProvider) {
 		super();
 		this.connectionProvider = connectionProvider;
 	}

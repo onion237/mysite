@@ -15,6 +15,7 @@ import com.douzone.web.util.MvcUtil;
 
 @WebServlet("/board")
 public class BoardController extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
 	private final ActionFactory actionFactory = new BoardActionFactory();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

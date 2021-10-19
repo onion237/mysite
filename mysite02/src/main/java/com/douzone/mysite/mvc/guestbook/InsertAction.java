@@ -27,7 +27,8 @@ public class InsertAction implements Action {
 		vo.setMessage(message);
 		
 		dao.insert(vo);
-		MvcUtil.redirect(request.getContextPath() + "/guestbook", request, response);
+		
+		MvcUtil.redirect(request.getContextPath() + "/guestbook?a=list", request, response);
 	}
 
 }

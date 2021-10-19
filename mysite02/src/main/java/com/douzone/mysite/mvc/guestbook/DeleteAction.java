@@ -1,6 +1,7 @@
 package com.douzone.mysite.mvc.guestbook;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,7 +25,7 @@ public class DeleteAction implements Action {
 		vo.setPassword(password);
 		
 		dao.delete(vo);
+		
 		MvcUtil.redirect(request.getContextPath() + "/guestbook", request, response);
 	}
-
 }
