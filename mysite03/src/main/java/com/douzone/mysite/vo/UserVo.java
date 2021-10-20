@@ -43,6 +43,17 @@ public class UserVo {
 	public void setJoinDate(String joinDate) {
 		this.joinDate = joinDate;
 	}
+	public boolean validate() {
+		
+		if(this.gender == null || this.email == null || this.name == null || this.password == null)
+			return false;
+		
+		if(!this.gender.equals("male") && !this.gender.equals("female")) return false;
+		
+		if(this.email.trim().isEmpty() || this.name.trim().isEmpty() || this.password.trim().isEmpty()) return false;
+		
+		return true;
+	}
 	@Override
 	public String toString() {
 		return "UserVo [no=" + no + ", name=" + name + ", email=" + email + ", password=" + password + ", gender="

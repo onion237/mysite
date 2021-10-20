@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.douzone.mysite.vo.BoardVo;
 import com.douzone.mysite.vo.PageInfo;
 import com.douzone.util.ConnectionProvider;
 
+@Repository
 public class BoardRespository {
 	private final ConnectionProvider connectionProvider;
 
@@ -54,7 +57,7 @@ public class BoardRespository {
 			conn.setAutoCommit(false);
 
 			pstmt = conn.prepareStatement(getGroupInfoSql);
-			pstmt.setLong(1, board.getNo());
+			pstmt.setLong(1, board.getReplyTo());
 
 			rs = pstmt.executeQuery();
 			

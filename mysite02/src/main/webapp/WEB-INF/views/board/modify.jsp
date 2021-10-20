@@ -32,12 +32,12 @@ pageContext.setAttribute("newline", "\n");
 						</tr>
 						<tr>
 							<td class="label">내용</td>
-							<td><textarea id="content" name="contents">${fn:replace(board.contents, newline, "<br/>") }</textarea>
+							<td><textarea id="content" name="contents">${board.contents}</textarea>
 							</td>
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="">취소</a> <input type="submit" value="수정">
+						<a href="${pageContext.request.contextPath }/board">취소</a> <input type="submit" value="수정">
 					</div>
 				</form>
 			</div>

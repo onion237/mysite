@@ -11,8 +11,20 @@ public class BoardVo {
 	private Long depth;
 	private Long userNo;
 	private Boolean isDeleted;
+		
+	private Long replyTo;
 	
-	
+	public boolean isWritable() {
+		if(this.title == null || this.title.trim().isEmpty()) return false;
+		
+		return true;
+	}
+	public Long getReplyTo() {
+		return replyTo;
+	}
+	public void setReplyTo(Long replyTo) {
+		this.replyTo = replyTo;
+	}
 	public Boolean getIsDeleted() {
 		return isDeleted;
 	}

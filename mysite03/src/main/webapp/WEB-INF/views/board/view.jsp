@@ -37,13 +37,13 @@ pageContext.setAttribute("newline", "\n");
 				</table>
 				<div class="bottom">
 					<c:if test="${not empty user}">
-						<a href="${pageContext.request.contextPath }/board?a=writeform&reply=${board.no}">댓글작성</a>
+						<a href="${pageContext.request.contextPath }/board/write?reply=${board.no}">댓글작성</a>
 					</c:if>
 					<a
-						href="${pageContext.request.contextPath }/board?a=list&cur=${param.cur}">글목록</a>
+						href="${pageContext.request.contextPath }/board?cur=${param.cur}">글목록</a>
 					<c:if test="${user.no == board.userNo }">
 						<a
-							href="${pageContext.request.contextPath }/board?a=modifyform&no=${board.no}">글수정</a>
+							href="${pageContext.request.contextPath }/board/update/${board.no}">글수정</a>
 					</c:if>
 				</div>
 			</div>

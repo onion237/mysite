@@ -14,7 +14,7 @@
 		<c:import url="/WEB-INF/views/includes/header.jsp"/>
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="" method="post">
+				<form id="search_form" action="${pageContext.request.contextPath }/board" method="get">
 					<input type="text" id="kwd" name="keyword" value="">
 					<input type="submit" value="찾기">
 				</form>
@@ -30,7 +30,7 @@
 					<c:forEach items="${list }" var="vo" varStatus="status">
 						<c:if test="${vo.isDeleted}">
 							<tr>
-								<td>${status.index }</td>
+								<td>${status.index + 1 }</td>
 								
 								<td style="text-align: left; padding-left:${12 * vo.depth}px">
 									<c:if test="${vo.depth > 0 }">
@@ -47,20 +47,20 @@
 						
 						<c:if test="${not vo.isDeleted }">
 							<tr>
-								<td>${status.index }</td>
+								<td>${status.index + 1 }</td>
 								
 								<td style="text-align: left; padding-left:${12 * vo.depth}px">
 									<c:if test="${vo.depth > 0 }">
 										<img src="${pageContext.request.contextPath }/assets/images/reply.png"/>
 									</c:if>
-									<a href="${pageContext.request.contextPath }/board?a=detail&no=${vo.no }&cur=${pager.curPage }">${vo.title }</a>
+									<a href="${pageContext.request.contextPath }/board/${vo.no }?cur=${pager.curPage }">${vo.title }</a>
 								</td>
 								<td>${vo.userName }</td>
 								<td>${vo.hit }</td>
 								<td>${vo.regDate }</td>
 								<td>
 									<c:if test="${vo.userNo == user.no }">
-										<a href="${pageContext.request.contextPath }/board?a=delete&no=${vo.no }" class="del">삭제</a>
+										<a href="${pageContext.request.contextPath }/board/delete/${vo.no }?cur=${param.cur}" class="del">삭제</a>
 									</c:if>
 								</td>
 							</tr>
@@ -75,7 +75,7 @@
 							<li>◀</li>
 						</c:if>
 						<c:if test="${pager.prevPage != -1 }">
-							<li><a href="${pageContext.request.contextPath }/board?a=list&cur=${pager.prevPage}">◀</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?cur=${pager.prevPage}">◀</a></li>
 						</c:if>
 						
 						<c:forEach begin="${pager.begin }" end="${pager.end }" step="1" varStatus="status">
@@ -85,7 +85,7 @@
 										<li class="selected">${status.index}</li>					
 									</c:if>
 									<c:if test="${status.index != pager.curPage}">
-										<li><a href="${pageContext.request.contextPath }/board?a=list&cur=${status.index}">${status.index}</a></li>
+										<li><a href="${pageContext.request.contextPath }/board?cur=${status.index}">${status.index}</a></li>
 									</c:if>								
 								</c:when>
 								
@@ -99,7 +99,7 @@
 						
 						
 						<c:if test="${pager.nextPage != -1 }">
-							<li><a href="${pageContext.request.contextPath }/board?a=list&cur=${pager.nextPage }">▶</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?cur=${pager.nextPage }">▶</a></li>
 						</c:if>
 						<c:if test="${pager.nextPage == -1 }">
 							<li>▶</li>
@@ -110,7 +110,7 @@
 				
 				<div class="bottom">
 					<c:if test="${user != null}">
-						<a href="${pageContext.request.contextPath }/board?a=writeform"
+						<a href="${pageContext.request.contextPath }/board/write"
 							id="new-book">글쓰기</a>
 					</c:if>
 				</div>				

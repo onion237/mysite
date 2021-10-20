@@ -8,6 +8,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class SimpleConnectionProvider implements ConnectionProvider {
 	private String url;
 	private String user;

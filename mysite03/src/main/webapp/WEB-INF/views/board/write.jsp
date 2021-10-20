@@ -16,9 +16,7 @@
 		<div id="content">
 			<div id="board">
 				<form class="board-form" method="post" action="${pageContext.request.contextPath }/board">
-					<input type = "hidden" name = "a" value="write">
-					<input type = "hidden" name = "reply" value="${param.reply }">
-					
+					<input type = "hidden" name = "replyTo" value="${param.reply }">
 					<table class="tbl-ex">
 						<tr>
 							<th colspan="2">글쓰기</th>
@@ -35,7 +33,7 @@
 						</tr>
 					</table>
 					<div class="bottom">
-						<a href="/board">취소</a>
+						<a href="${pageContext.request.contextPath }/board">취소</a>
 						<input type="submit" value="등록">
 					</div>
 				</form>				

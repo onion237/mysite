@@ -5,12 +5,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.douzone.mysite.exception.UserRepositoryException;
 import com.douzone.mysite.vo.UserVo;
 import com.douzone.util.ConnectionProvider;
 
+@Repository
 public class UserRepository {
 	ConnectionProvider connectionProvider;
 
+	@Autowired
 	public UserRepository(ConnectionProvider connectionProvider) {
 		super();
 		this.connectionProvider = connectionProvider;
@@ -38,7 +44,7 @@ public class UserRepository {
 		return result;
 	}
 	
-	public UserVo findByUserNo(Long no) {
+	public UserVo findByUserNo(Long no) throws UserRepositoryException{
 		UserVo result = null;
 		String sql = "select no, name, email, gender from user where no = ?";
 		try(Connection conn = connectionProvider.getConnection();
@@ -56,14 +62,13 @@ public class UserRepository {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UserRepositoryException(e);
 		}
 		
 		return result;
 	}
 
-	public UserVo findByEmailAndPassword(UserVo user) {
+	public UserVo findByEmailAndPassword(UserVo user) throws UserRepositoryException{
 		UserVo result = null;
 		String sql = "select no, name, email, password, gender, date_format(join_date, '%Y/%m/%d %H:%i:%s') as d from user where email = ? and password = ?";
 	
@@ -86,8 +91,7 @@ public class UserRepository {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UserRepositoryException(e);
 		}
 		return result;
 	}

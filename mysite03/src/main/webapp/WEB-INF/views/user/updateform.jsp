@@ -19,7 +19,7 @@
 			<div id="user">
 
 				<form id="join-form" name="joinForm" method="post"
-					action="${pageContext.request.contextPath }/user?a=update">
+					action="${pageContext.request.contextPath }/user/update">
 					<label class="block-label" for="name">이름</label> <input id="name"
 						name="name" type="text" value="${user.name }"> <label
 						class="block-label" for="email">이메일</label>

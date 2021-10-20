@@ -10,6 +10,11 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<mvc:annotation-driven />
-	<context:component-scan base-package="com.douzone.mysite.controller" />
+	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet으로 위임 -->
+	<!-- <mvc:default-servlet-handler/>  -->
 	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
+	<mvc:view-resolvers>
+		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
+	</mvc:view-resolvers>
+	<context:component-scan base-package="com.douzone.mysite.controller, com.douzone.mysite.advice" />
 </beans>

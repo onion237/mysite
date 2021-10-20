@@ -30,7 +30,7 @@
 					<c:forEach items="${list }" var="vo" varStatus="status">
 						<c:if test="${vo.isDeleted}">
 							<tr>
-								<td>${status.index }</td>
+								<td>${status.index + 1}</td>
 								
 								<td style="text-align: left; padding-left:${12 * vo.depth}px">
 									<c:if test="${vo.depth > 0 }">
@@ -47,7 +47,7 @@
 						
 						<c:if test="${not vo.isDeleted }">
 							<tr>
-								<td>${status.index }</td>
+								<td>${status.index + 1}</td>
 								
 								<td style="text-align: left; padding-left:${12 * vo.depth}px">
 									<c:if test="${vo.depth > 0 }">
