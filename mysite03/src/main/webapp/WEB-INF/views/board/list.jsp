@@ -75,7 +75,7 @@
 							<li>◀</li>
 						</c:if>
 						<c:if test="${pager.prevPage != -1 }">
-							<li><a href="${pageContext.request.contextPath }/board?cur=${pager.prevPage}">◀</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?cur=${pager.prevPage}&keyword=${param.keyword}">◀</a></li>
 						</c:if>
 						
 						<c:forEach begin="${pager.begin }" end="${pager.end }" step="1" varStatus="status">
@@ -85,7 +85,7 @@
 										<li class="selected">${status.index}</li>					
 									</c:if>
 									<c:if test="${status.index != pager.curPage}">
-										<li><a href="${pageContext.request.contextPath }/board?cur=${status.index}">${status.index}</a></li>
+										<li><a href="${pageContext.request.contextPath }/board?cur=${status.index}&keyword=${param.keyword}">${status.index}</a></li>
 									</c:if>								
 								</c:when>
 								
@@ -99,7 +99,7 @@
 						
 						
 						<c:if test="${pager.nextPage != -1 }">
-							<li><a href="${pageContext.request.contextPath }/board?cur=${pager.nextPage }">▶</a></li>
+							<li><a href="${pageContext.request.contextPath }/board?cur=${pager.nextPage }&keyword=${param.keyword}">▶</a></li>
 						</c:if>
 						<c:if test="${pager.nextPage == -1 }">
 							<li>▶</li>
