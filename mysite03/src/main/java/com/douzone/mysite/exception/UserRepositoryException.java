@@ -1,12 +1,10 @@
 package com.douzone.mysite.exception;
 
-import java.sql.SQLException;
-
 public class UserRepositoryException extends RuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
-	public UserRepositoryException(SQLException e) {
+	public UserRepositoryException(Throwable e) {
 		super(e);
 	}
 

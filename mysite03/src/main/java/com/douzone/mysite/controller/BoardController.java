@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.douzone.mysite.repository.BoardRespository;
+import com.douzone.mysite.repository.GuestBookRepository;
 import com.douzone.mysite.service.BoardService;
 import com.douzone.mysite.vo.BoardVo;
 import com.douzone.mysite.vo.UserVo;
@@ -22,11 +25,19 @@ import com.douzone.mysite.vo.UserVo;
 public class BoardController {
 	private final BoardService boardService;
 	@Autowired
+	private GuestBookRepository guestBookRepository;
+	@Autowired
 	public BoardController(BoardService boardService) {
 		super();
 		this.boardService = boardService;
 	}
 
+	@ResponseBody
+	@GetMapping("/test")
+	public String test() {
+		guestBookRepository.findAll();
+		return "test";
+	}
 	@GetMapping("")
 	public String list(Model model, @RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "1") int cur) {
 		Map<String, Object> listAndPageInfo = boardService.getListAndPageInfo(keyword,cur);
