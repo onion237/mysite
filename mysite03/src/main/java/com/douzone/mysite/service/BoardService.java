@@ -26,7 +26,7 @@ public class BoardService {
 		
 		PageInfo page = new PageInfo();
 		page.setCurPage(curPage);
-		
+		page.setOffset((curPage - 1) * page.getCntPerPage());
 		List<BoardVo> result = boardRespository.findAll(board, page);
 		
 		int totalPage = (int)Math.ceil((double)boardRespository.getBoardCnt(board) / page.getCntPerPage());

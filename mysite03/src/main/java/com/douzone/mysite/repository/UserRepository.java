@@ -49,7 +49,6 @@ public class UserRepository {
 		String sql = "select no, name, email, gender from user where no = ?";
 		try(Connection conn = connectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)){
-			
 			pstmt.setLong(1, no);
 			try(ResultSet rs = pstmt.executeQuery()){
 				if(rs.next()) {
@@ -70,7 +69,7 @@ public class UserRepository {
 
 	public UserVo findByEmailAndPassword(UserVo user) throws UserRepositoryException{
 		UserVo result = null;
-		String sql = "select no, name, email, password, gender, date_format(join_date, '%Y/%m/%d %H:%i:%s') as d from user where email = ? and password = ?";
+		String sql = "select no, name, email, password, gender, date_format(join_date, '%Y/%m/%d %H:%i:%s') as regDate, role from user where email = ? and password = ?";
 	
 		try(Connection conn = connectionProvider.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)){
@@ -86,7 +85,8 @@ public class UserRepository {
 					result.setEmail(rs.getString("email"));
 					result.setPassword(rs.getString("password"));
 					result.setGender(rs.getString("gender"));
-					result.setJoinDate(rs.getString("d"));
+					result.setJoinDate(rs.getString("regDate"));
+					result.setRole(rs.getString("role"));
 				}
 			}
 			

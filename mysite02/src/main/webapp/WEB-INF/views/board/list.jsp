@@ -110,7 +110,7 @@
 				
 				<div class="bottom">
 					<c:if test="${user != null}">
-						<a href="${pageContext.request.contextPath }/board?a=writeform"
+						<a href="${pageContext.request.contextPath }/board?a=writeform&cur=${pager.curPage }&keyword=${param.keyword}"
 							id="new-book">글쓰기</a>
 					</c:if>
 				</div>				

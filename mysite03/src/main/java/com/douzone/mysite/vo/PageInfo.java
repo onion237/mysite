@@ -12,6 +12,18 @@ public class PageInfo {
 	private int cntPerPage;
 	private int pageRange;
 	
+	private int offset;
+	
+	public int getOffset() {
+		return offset;
+	}
+
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
+
 	public PageInfo() {
 		super();
 		this.cntPerPage = 5;

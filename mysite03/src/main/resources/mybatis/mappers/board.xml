@@ -19,7 +19,7 @@
 	<select id="findAll" parameterType="hashmap" resultType="BoardVo">
 		select board.no as no, title, hit, date_format(reg_date, '%Y-%m-%d %H:%i:%s') as regDate, group_no, order_no, depth, user_no, name as userName, is_deleted
 		from board join user on user.no = board.user_no where title like CONCAT('%',#{board.title},'%')
-		order by group_no desc, order_no asc limit #{page.curPage}, #{page.cntPerPage}
+		order by group_no desc, order_no asc limit #{page.offset}, #{page.cntPerPage}
 	</select>
 	
 	<select id="getCount" parameterType="BoardVo" resultType="long">
