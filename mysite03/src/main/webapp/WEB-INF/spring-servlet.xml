@@ -10,17 +10,46 @@
 	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 	<mvc:annotation-driven>
+		<!-- Argument Resolver -->
 		<mvc:argument-resolvers>
 			<bean class="com.douzone.util.AuthUserArgumentResolver"/>
 		</mvc:argument-resolvers>
+		
+		<!-- Message Resolver -->
+		<mvc:message-converters>
+			<bean class="org.springframework.http.converter.StringHttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>text/html; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+				<property name="supportedMediaTypes">
+					<list>
+						<value>application/json; charset=UTF-8</value>
+					</list>
+				</property>
+			</bean>
+		</mvc:message-converters>
 	</mvc:annotation-driven>
+	
 	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet으로 위임 -->
 	<!-- <mvc:default-servlet-handler/>  -->
-	<mvc:resources location="/assets/" mapping="/assets/**"></mvc:resources>
+	
+	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	<mvc:resources mapping="/images/**" location="file:/upload-images/"/>
 	
-	
+	<!-- Interceptors -->
 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.douzone.util.SiteInfoLoadInterceptor"/>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/main/update"/>
+			<bean class="com.douzone.util.SiteInfoUpdateInterceptor"/>
+		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/login"/>
 			<bean class="com.douzone.mysite.security.LoginInterceptor"/>
@@ -38,7 +67,7 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	
-	<!-- 멀티파트 리졸버 -->
+	<!-- Multipart Resolver -->
 	<bean id="multipartResolver" 
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<!-- 최대업로드 가능한 바이트크기 -->
@@ -47,10 +76,24 @@
 		<!-- property name="maxInMemorySize" value="52428800" /-->
 		<!-- defaultEncoding -->
 		<property name="defaultEncoding" value="utf-8" />
-	</bean>	
+	</bean>
+
+	<!-- Message Source -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages/messages_ko</value>
+			</list>
+		</property>
+		<property name="defaultEncoding">
+			<value>UTF-8</value>
+		</property>
+	</bean>
 	
+	<!-- View Resolver -->
 	<mvc:view-resolvers>
 		<mvc:jsp prefix="/WEB-INF/views/" suffix=".jsp"/>
 	</mvc:view-resolvers>
+	
 	<context:component-scan base-package="com.douzone.mysite.controller, com.douzone.mysite.advice" />
 </beans>

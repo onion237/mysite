@@ -1,5 +1,8 @@
 package com.douzone.mysite.controller;
 
+import javax.servlet.ServletContext;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +18,7 @@ import com.douzone.mysite.vo.SiteVo;
 @Auth(role = "ADMIN")
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController {	
 	private final SiteService siteService;
 	
 	public AdminController(SiteService siteService) {
@@ -25,9 +28,9 @@ public class AdminController {
 	
 	@GetMapping("")
 	public String main(Model model) {
-		model.addAttribute("siteVo", siteService.getCurrentSite());
 		return "admin/main";
 	}
+	
 	@PostMapping("/main/update")
 	public String main(SiteVo vo, @RequestParam("file") MultipartFile multipartFile) {
 		System.out.println(vo);

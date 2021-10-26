@@ -10,8 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.http.converter.xml.MappingJackson2XmlHttpMessageConverter;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.douzone.mysite.dto.ApiResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -28,9 +34,21 @@ public class GlobalExceptionHandler {
 		logger.error(errors.toString());
 		
 		// 2. 요청 구분
-		
-		// 3. Sorry
-		request.setAttribute("exception", errors.toString());
-		request.getRequestDispatcher("/WEB-INF/views/error/exception.jsp").forward(request, response);
+		// 만약, JSON 요청인 경우 request header의 Accept에 application/json
+		// 만약, html 요청인 경우 request header의 Accept에 text/html
+		//일단, 컨텐츠 협상 고려 x
+		if(request.getHeader("accept").contains("application/json")) {
+			// 3. Json Sorry
+			response.setContentType("application/json; charset=utf-8");
+			response
+				.getWriter()
+				.println(new ObjectMapper().writeValueAsString(ApiResult.fail(errors.toString())));
+			
+		}else {
+			// 3. Html Sorry
+			request.setAttribute("exception", errors.toString());
+			request.getRequestDispatcher("/WEB-INF/views/error/exception.jsp").forward(request, response);
+			
+		}
 	}
 }

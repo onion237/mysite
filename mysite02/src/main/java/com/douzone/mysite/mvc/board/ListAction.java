@@ -41,12 +41,14 @@ public class ListAction implements Action {
 		page.setCurPage(curPage);
 		
 		List<BoardVo> result = dao.findAll(board, page);
-		int totalPage = (int)Math.ceil((double)dao.getBoardCnt(board) / page.getCntPerPage());
-		int nextPage = curPage >= totalPage ? -1 : curPage + 1; 
-		int prevPage = curPage <= 1? -1 : curPage - 1;
+		
+		int totalCnt = dao.getBoardCnt(board);
+		int totalPage = (int)Math.ceil((double)totalCnt / page.getCntPerPage());
 		int begin = page.getCurPage() - ((page.getPageRange() - 1) / 2);
 		begin = begin < 1 ? 1 : begin;
 		int end = begin + page.getPageRange() - 1;
+		int nextPage = curPage >= totalPage ? -1 : curPage + 1; 
+		int prevPage = curPage <= 1? -1 : curPage - 1;
 		
 		page.setTotalPage(totalPage);
 		page.setNextPage(nextPage);

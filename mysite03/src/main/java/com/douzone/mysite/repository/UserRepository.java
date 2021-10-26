@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -14,14 +15,16 @@ import com.douzone.util.ConnectionProvider;
 
 @Repository
 public class UserRepository {
-	ConnectionProvider connectionProvider;
+	private final ConnectionProvider connectionProvider;
+	private final SqlSession sqlSession;
 
 	@Autowired
-	public UserRepository(ConnectionProvider connectionProvider) {
+	public UserRepository(ConnectionProvider connectionProvider, SqlSession sqlSession) {
 		super();
 		this.connectionProvider = connectionProvider;
+		this.sqlSession = sqlSession;
 	}
-	
+
 	public boolean insert(UserVo user) {
 		boolean result = false;
 		
@@ -44,6 +47,7 @@ public class UserRepository {
 		return result;
 	}
 	
+
 	public UserVo findByUserNo(Long no) throws UserRepositoryException{
 		UserVo result = null;
 		String sql = "select no, name, email, gender from user where no = ?";
@@ -124,6 +128,9 @@ public class UserRepository {
 		}
 		
 		return result;
+	}
+	public UserVo isEmailDuplicated(String email) {
+		return sqlSession.selectOne("user.findByEmail", email);
 	}
 
 		

@@ -39,4 +39,10 @@ public class UserService {
 	public boolean update(UserVo user) {
 		return userRepository.update(user);
 	}
+
+	public boolean isAvailableEmail(String email) {
+		if(email == null || email.trim().isEmpty()) return false;
+		
+		return userRepository.isEmailDuplicated(email) == null;
+	}
 }

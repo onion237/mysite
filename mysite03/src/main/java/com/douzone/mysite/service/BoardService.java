@@ -30,11 +30,15 @@ public class BoardService {
 		List<BoardVo> result = boardRespository.findAll(board, page);
 		
 		int totalPage = (int)Math.ceil((double)boardRespository.getBoardCnt(board) / page.getCntPerPage());
-		int nextPage = curPage >= totalPage ? -1 : curPage + 1; 
-		int prevPage = curPage <= 1? -1 : curPage - 1;
 		int begin = page.getCurPage() - ((page.getPageRange() - 1) / 2);
 		begin = begin < 1 ? 1 : begin;
-		int end = begin + page.getPageRange() - 1;
+//		int end = begin + page.getPageRange() - 1;
+		int end = Math.min(begin + page.getPageRange() - 1, totalPage);
+		
+		int nextPage = curPage >= totalPage ? -1 : curPage + 1; 
+		int prevPage = curPage <= 1? -1 : curPage - 1;
+//		int nextPage = end >= totalPage ? -1 : end + 1; 
+//		int prevPage = begin <= 1? -1 : begin - 1;
 		
 		page.setTotalPage(totalPage);
 		page.setNextPage(nextPage);

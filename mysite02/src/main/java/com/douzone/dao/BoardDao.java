@@ -107,7 +107,7 @@ public class BoardDao {
 				PreparedStatement pstmt = conn.prepareStatement(sql)){
 			//파라미터 바인딩
 			pstmt.setString(1, "%" + board.getTitle() + "%");
-			pstmt.setInt(2, (page.getCurPage() - 1) * page.getCntPerPage());
+			pstmt.setInt(2, (page.getCurPage() - 1) * page.getCntPerPage()); //
 			pstmt.setInt(3, page.getCntPerPage());
 			try(ResultSet rs = pstmt.executeQuery()){
 				BoardVo vo = null;
