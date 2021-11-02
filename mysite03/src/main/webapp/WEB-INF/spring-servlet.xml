@@ -35,8 +35,7 @@
 	</mvc:annotation-driven>
 	
 	<!-- 서블릿 컨테이너(tomcat)의 DefaultServlet으로 위임 -->
-	<!-- <mvc:default-servlet-handler/>  -->
-	
+	<mvc:default-servlet-handler/>
 	<mvc:resources mapping="/assets/**" location="/assets/"/>
 	<mvc:resources mapping="/images/**" location="file:/upload-images/"/>
 	
@@ -52,6 +51,9 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/user/login"/>
+			<!-- 
+			<mvc:mapping path="/user/auth"/>
+			 -->
 			<bean class="com.douzone.mysite.security.LoginInterceptor"/>
 		</mvc:interceptor>
 		<mvc:interceptor>

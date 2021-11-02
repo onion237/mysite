@@ -13,6 +13,7 @@ import com.douzone.vo.GuestBookVo;
 import com.douzone.web.mvc.Action;
 import com.douzone.web.util.MvcUtil;
 
+
 public class DeleteAction implements Action {
 	GuestBookDao dao = new GuestBookDao(new SimpleConnectionProvider());
 	@Override

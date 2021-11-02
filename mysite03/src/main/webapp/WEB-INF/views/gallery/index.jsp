@@ -57,7 +57,9 @@ pageContext.setAttribute("newLine", "\n");
 			<div id="gallery">
 				<div>
 					<h1>갤러리</h1>
-					<a href="" id="upload-image">이미지 올리기</a>
+					<c:if test="${ user != null && user.role == 'ADMIN'}">
+						<a href="" id="upload-image">이미지 올리기</a>
+					</c:if>
 				</div>
 				<ul>
 					<c:forEach items="${list }" var="pic" varStatus="status">
@@ -65,9 +67,12 @@ pageContext.setAttribute("newLine", "\n");
 							data-lightbox="gallery" class="image"
 							style="background-image:url('${pageContext.request.contextPath }${pic.url}')">&nbsp;</a>
 
-							<a
-							href="${pageContext.request.contextPath }/gallery/delete/${pic.no}"
-							class="del-button" title="삭제">삭제</a></li>
+						<c:if test="${ user != null && user.role == 'ADMIN'}">
+								<a
+								href="${pageContext.request.contextPath }/gallery/delete/${pic.no}"
+								class="del-button" title="삭제">삭제</a>
+						</c:if>
+								</li>
 					</c:forEach>
 
 				</ul>

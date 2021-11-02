@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+		<typeAlias type="com.douzone.mysite.vo.GuestBookVo" alias="GuestBookVo"/>
+		<typeAlias type="com.douzone.mysite.vo.BoardVo" alias="BoardVo"/>
+		<typeAlias type="com.douzone.mysite.vo.GalleryVo" alias="GalleryVo"/>
+		<typeAlias type="com.douzone.mysite.vo.SiteVo" alias="SiteVo"/>
+		<typeAlias type="com.douzone.mysite.vo.UserVo" alias="UserVo"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="mybatis/mappers/guestbook.xml" />
+		<mapper resource="mybatis/mappers/board.xml" />
+		<mapper resource="mybatis/mappers/gallery.xml" />
+		<mapper resource="mybatis/mappers/site.xml" />
+		<mapper resource="mybatis/mappers/user.xml" />
+	</mappers>
+</configuration>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="gallery">
+	<select id="findAll" resultType="GalleryVo">
+		select no, url, comments from gallery
+	</select>
+	<insert id="insert" parameterType="GalleryVo">
+		insert into gallery(url, comments) values(#{url}, #{comments})
+	</insert>
+	<delete id="delete" parameterType="long">
+		delete from gallery where no = #{no} 
+	</delete>
+</mapper>

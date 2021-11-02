@@ -3,13 +3,13 @@ package com.douzone.mysite.security;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.douzone.mysite.service.UserService;
 import com.douzone.mysite.vo.UserVo;
 
-public class LoginInterceptor implements HandlerInterceptor{
+public class LoginInterceptor extends HandlerInterceptorAdapter{
 	private final UserService userService;
 
 	public LoginInterceptor(UserService userService) {

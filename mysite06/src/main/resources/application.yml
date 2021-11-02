@@ -1,0 +1,80 @@
+spring:
+   profiles:
+      active: dev
+---
+# common config
+server:
+# active profile
+   port: 8080
+   servlet:
+      context-path: /mysite06
+
+spring:
+   devtools:
+      livereload:
+         enabled: true
+   mvc:
+      view:
+         prefix: /WEB-INF/views/
+         suffix: .jsp
+   http:
+      encoding:
+         charset: utf-8
+         forced: false
+         forced-request: false
+         forced-response: false
+   aop:
+      auto: true
+      proxy-tartget-class: true
+   messages:
+      always-message-format: true
+      basename: messages/messages_ko
+      encoding: utf-8
+   servlet:
+      multipart:
+         enabled: true
+         max-file-size: 50MB
+         max-request-size: 50MB
+
+# mybatis
+mybatis:
+   config-location: classpath:mybatis/configuration.xml
+
+# logging
+logging:
+   config: classpath:logback.xml
+
+# custom property
+fileupload:
+   urlBasePath: /images
+   fileSaveBasePath: /upload-images
+   resourceMapping: ${fileupload.urlBasePath}/**
+   fileUploadLocation: file:${fileupload.fileSaveBasePath}/
+---
+# dev profile
+spring:
+   profiles: dev
+   datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8
+      username: webdb
+      password: webdb
+     # initialSize: 20
+     # maxActive: 40
+      hikari:
+         maximum-pool-size: 50
+         minimum-idle: 30
+---
+# prod profile
+spring:
+   profiles: prod
+   datasource:
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8
+      username: webdb
+      password: webdb
+     # initialSize: 30
+     # maxActive: 50
+      hikari:
+         maximum-pool-size: 50
+         minimum-idle: 30
