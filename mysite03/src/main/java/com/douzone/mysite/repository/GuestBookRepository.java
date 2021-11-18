@@ -1,6 +1,8 @@
 package com.douzone.mysite.repository;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -21,6 +23,13 @@ public class GuestBookRepository {
 	}
 	public List<GuestBookVo> findAll(){
 		List<GuestBookVo> result = sqlSession.selectList("guestbook.findAll");
+		return result;
+	}
+	public List<GuestBookVo> findAll(GuestBookVo vo, Integer count){
+		Map<String, Object> map = new HashMap<>();
+		map.put("guestbook", vo);
+		map.put("count", count);
+		List<GuestBookVo> result = sqlSession.selectList("guestbook.findAll", map);
 		return result;
 	}
 	public boolean insert(GuestBookVo vo) {

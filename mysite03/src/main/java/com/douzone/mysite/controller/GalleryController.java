@@ -29,8 +29,9 @@ public class GalleryController {
 	}
 	@Auth(role = "ADMIN")
 	@PostMapping("/upload")
-	public String upload(GalleryVo vo, @RequestParam("file") MultipartFile file) {
+	public String upload(GalleryVo vo, @RequestParam("file") MultipartFile file) throws InterruptedException {
 		System.out.println(file);
+		Thread.sleep(10000);
 		galleryService.upload(vo, file);
 		return "redirect:/gallery";
 	}

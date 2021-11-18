@@ -58,6 +58,7 @@ public class UserController {
 //			model.addAttribute("errors", result.getAllErrors());
 //			return "user/joinform";
 //		}
+		
 		if(result.hasErrors()) {
 			
 			model.addAllAttributes(result.getModel());
@@ -66,9 +67,9 @@ public class UserController {
 			});
 			return "user/joinform";
 		}
-//		if (!userService.join(user)) {
-//			return "redirect:/";
-//		}
+		if (!userService.join(user)) {
+			return "redirect:/";
+		}
 
 		return "redirect:/user/joinsuccess";
 	}
@@ -90,6 +91,8 @@ public class UserController {
 		return "user/updateform";
 	}
 
+//	@Auth
+	
 	@Auth
 	@PostMapping("/update")
 	public String update(@AuthUser UserVo authUser, UserVo user) {

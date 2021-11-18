@@ -29,5 +29,9 @@ public class GuestBookService {
 	public boolean delete(GuestBookVo vo) {
 		return guestBookRepository.delete(vo);
 	}
+
+	public List<GuestBookVo> getList(GuestBookVo vo, Integer count) {
+		return guestBookRepository.findAll(vo, count);
+	}
 	
 }

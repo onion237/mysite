@@ -1,80 +1,107 @@
+# active spring boot profile
 spring:
    profiles:
       active: dev
 ---
-# common config
-server:
-# active profile
-   port: 8080
-   servlet:
-      context-path: /mysite06
 
+# common - spring configuration
 spring:
+
+   # devtools - live reload
    devtools:
       livereload:
          enabled: true
+
+   # mvc
    mvc:
       view:
          prefix: /WEB-INF/views/
          suffix: .jsp
-   http:
-      encoding:
-         charset: utf-8
-         forced: false
-         forced-request: false
-         forced-response: false
-   aop:
-      auto: true
-      proxy-tartget-class: true
+
+   # message resource(Internationalization)
    messages:
-      always-message-format: true
+      always-use-message-format: true
       basename: messages/messages_ko
       encoding: utf-8
+
+   # multipart
    servlet:
       multipart:
          enabled: true
          max-file-size: 50MB
          max-request-size: 50MB
 
+   # aop(@EnableAspectJAutoProxy)
+   aop:
+      auto: true
+      proxy-target-class: true 
+---
+
+# server
+server:
+   port: 8080
+   servlet:
+     context-path: /mysite06
+     encoding:
+        charset: utf-8
+        enabled: true
+        force: false
+        force-request: false
+        force-response: false
+---
+
 # mybatis
 mybatis:
    config-location: classpath:mybatis/configuration.xml
 
+
+---
+
 # logging
 logging:
-   config: classpath:logback.xml
+   config: classpath:logback.xml 
 
+---
 # custom property
 fileupload:
    urlBasePath: /images
    fileSaveBasePath: /upload-images
    resourceMapping: ${fileupload.urlBasePath}/**
    fileUploadLocation: file:${fileupload.fileSaveBasePath}/
+
 ---
-# dev profile
+
+# dev profile - spring boot configuration
+
 spring:
-   profiles: dev
+   config:
+      activate:
+         on-profile: dev
+      
+   # datasource
    datasource:
-      driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8
       username: webdb
+
       password: webdb
-     # initialSize: 20
-     # maxActive: 40
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://127.0.0.1:3306/webdb?characterEncoding=utf8
       hikari:
-         maximum-pool-size: 50
-         minimum-idle: 30
+         minimum-idle: 20
+         maximum-pool-size: 40
+
 ---
-# prod profile
+# production profile - spring boot configuration
 spring:
-   profiles: prod
+   config:
+      activate:
+         on-profile: production
+
+   # datasource
    datasource:
-      driver-class-name: org.mariadb.jdbc.Driver
-      url: jdbc:mysql://127.0.0.1:3306/webdb?charset=utf8
       username: webdb
-      password: webdb
-     # initialSize: 30
-     # maxActive: 50
+      password: blahblha#!@0909#@!
+      driver-class-name: org.mariadb.jdbc.Driver
+      url: jdbc:mysql://227.8.9.10:3306/webdb?characterEncoding=utf8
       hikari:
-         maximum-pool-size: 50
-         minimum-idle: 30
+         minimum-idle: 100
+         maximum-pool-size: 200

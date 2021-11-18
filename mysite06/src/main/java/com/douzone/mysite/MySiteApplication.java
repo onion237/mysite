@@ -1,13 +1,10 @@
 package com.douzone.mysite;
 
 import java.util.stream.Stream;
-
 import javax.sql.DataSource;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-
 import com.zaxxer.hikari.HikariDataSource;
 
 @SpringBootApplication

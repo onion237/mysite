@@ -94,8 +94,7 @@ public class BoardController {
 	
 	@Auth
 	@PostMapping("/{no}")
-	public String update(@PathVariable Long no, BoardVo board, @AuthUser UserVo authUser) {
-		
+	public String update(@PathVariable Long no, BoardVo board, @AuthUser UserVo authUser) {	
 		if(authUser.getNo() != boardService.getWriterNo(no)) {
 			System.out.println("권한 없음!!!");
 			return "redirect:/";

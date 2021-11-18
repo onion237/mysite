@@ -47,5 +47,9 @@ public class GuestBookController {
 		guestBookService.delete(vo);
 		return "redirect:/guestbook";
 	}
+	@GetMapping("/spa")
+	public String spa() {
+		return "guestbook/index-ajax";
+	}
 	
 }

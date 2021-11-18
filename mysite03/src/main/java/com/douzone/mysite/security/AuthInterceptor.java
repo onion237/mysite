@@ -23,10 +23,18 @@ public class AuthInterceptor implements HandlerInterceptor {
 			return true;
 
 		// casting
+//		System.out.println(handler.getClass().getMe;
+		
 		HandlerMethod method = (HandlerMethod) handler;
 		// @Auth anotation가져오기
 		Auth authAnnotation = method.getMethodAnnotation(Auth.class);
-
+		System.out.println(authAnnotation);
+//		for(Annotation anno : method.getMethod().getAnnotations()) {
+//			System.out.println(anno);
+//			System.out.println("=============================");
+//		}
+		
+		
 		// 메소드에 @Auth가 적용이 안돼있으면 클래스에 적용돼있는지 확인
 		if (authAnnotation == null) {
 			authAnnotation = method.getBeanType().getAnnotation(Auth.class);
@@ -34,12 +42,13 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 		if (authAnnotation == null)
 			return true;
+		
 
 		UserVo authUser = (UserVo) request.getSession().getAttribute("user");
 
 		// 인가여부 확인
 		if (authUser != null
-				&& (authAnnotation.role().equals(authUser.getRole()) || "ADMIN".equals(authUser.getRole())))
+				&& ("ADMIN".equals(authUser.getRole()) || authAnnotation.role().equals(authUser.getRole())))
 			return true;
 
 		// @Auth 적용이 되어있으면 인증여부 확인
